@@ -31,7 +31,7 @@ export default function Weather() {
             </span>
             <span className="actual-temperature"></span>
             <span className="temperature-celsius">
-              <strong> Â°C </strong>
+              <strong> °C </strong>
             </span>
           </div>
         </div>
