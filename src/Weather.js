@@ -29,9 +29,7 @@ export default function Weather() {
             <span>
               <img src="" className="temperature-icone" />
             </span>
-            <span className="actual-temperature">
-              {Math.round(weather.temperature)}
-            </span>
+            <span className="actual-temperature"></span>
             <span className="temperature-celsius">
               <strong> Â°C </strong>
             </span>
