@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 
 export default function Weather() {
+  function actualDate() {
+    const date = new Date();
+    const options = { weekday: "long" };
+    const day = date.toLocaleDateString("en-US", options);
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    if (hour < 10) {
+      return `${day} 0${hour}:${minutes}`;
+    }
+    if (minutes < 10) {
+      return `${day} ${hour}:0${minutes}`;
+    } else {
+      return `${day} ${hour}:${minutes}`;
+    }
+  }
   return (
     <div className="Search-Show">
       <header>
@@ -19,7 +34,7 @@ export default function Weather() {
           <div>
             <h1 className="City-name"></h1>
             <p className="City-details">
-              <span></span>, <span></span>
+              <span>{actualDate()}</span>, <span></span>
               <br />
               Humidity: <strong>%</strong>, Wind:
               <strong>km/h</strong>
@@ -30,9 +45,7 @@ export default function Weather() {
               <img src="" className="temperature-icone" />
             </span>
             <span className="actual-temperature"></span>
-            <span className="temperature-celsius">
-              <strong> °C </strong>
-            </span>
+            <span className="temperature-celsius">°C</span>
           </div>
         </div>
         <div className="weather-forecast"></div>
