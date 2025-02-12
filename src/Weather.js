@@ -1,5 +1,6 @@
 import React, { use, useState } from "react";
 import axios from "axios";
+import ReactAnimatedWeather from "react-animated-weather";
 
 export default function Weather() {
   const [city, setCity] = useState("");
