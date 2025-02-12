@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
+import axios from "axios";
 
 export default function Weather() {
   const [city, setCity] = useState("");
@@ -9,11 +10,24 @@ export default function Weather() {
     const day = date.toLocaleDateString("en-US", options);
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    if (minutes && hour < 10) {
-      return `${day} 0${hour}:0${minutes}`;
+    if (hour < 10) {
+      return `${day} 0${hour}:${minutes}`;
+    }
+    if (minutes < 10) {
+      return `${day} ${hour}:0${minutes}`;
     } else {
       return `${day} ${hour}:${minutes}`;
     }
+  }
+  let weather = {
+    temperature: 19,
+    wind: 20,
+    humidity: 30,
+    description: "cloudy",
+  };
+
+  function citySubmit(event) {
+    event.preventDefault();
   }
   function citySearch(event) {
     setCity(event.target.value);
@@ -21,7 +35,7 @@ export default function Weather() {
   return (
     <div className="Search-Show">
       <header>
-        <form className="search-block">
+        <form className="search-block" onSubmit={citySubmit}>
           <input
             type="search"
             placeholder="Enter a City..."
@@ -35,19 +49,19 @@ export default function Weather() {
       <main>
         <div className="Weather-Content">
           <div>
-            <h1 className="City-name">{city}</h1>
+            <h1 className="City-name"></h1>
             <p className="City-details">
-              <span>{actualDate()}</span>, <span></span>
+              <span>{actualDate()}</span>, <span>{weather.description}</span>
               <br />
-              Humidity: <strong>%</strong>, Wind:
-              <strong>km/h</strong>
+              Humidity: <strong>{weather.humidity}%</strong>, Wind:
+              <strong> {weather.wind} km/h</strong>
             </p>
           </div>
           <div className="City-temperature">
             <span>
               <img src="" className="temperature-icone" />
             </span>
-            <span className="actual-temperature"></span>
+            <span className="actual-temperature">{weather.temperature}</span>
             <span className="temperature-celsius">°C</span>
           </div>
         </div>
