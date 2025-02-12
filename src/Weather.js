@@ -19,15 +19,10 @@ export default function Weather() {
       return `${day} ${hour}:${minutes}`;
     }
   }
-  let weather = {
-    temperature: 19,
-    wind: 20,
-    humidity: 30,
-    description: "cloudy",
-  };
 
   function citySubmit(event) {
     event.preventDefault();
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
   }
   function citySearch(event) {
     setCity(event.target.value);
@@ -51,17 +46,17 @@ export default function Weather() {
           <div>
             <h1 className="City-name"></h1>
             <p className="City-details">
-              <span>{actualDate()}</span>, <span>{weather.description}</span>
+              <span>{actualDate()}</span>, <span></span>
               <br />
-              Humidity: <strong>{weather.humidity}%</strong>, Wind:
-              <strong> {weather.wind} km/h</strong>
+              Humidity: <strong>%</strong>, Wind:
+              <strong> km/h</strong>
             </p>
           </div>
           <div className="City-temperature">
             <span>
               <img src="" className="temperature-icone" />
             </span>
-            <span className="actual-temperature">{weather.temperature}</span>
+            <span className="actual-temperature"></span>
             <span className="temperature-celsius">°C</span>
           </div>
         </div>
