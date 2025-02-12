@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 
 export default function Weather() {
+  const [city, setCity] = useState("");
+
   function actualDate() {
     const date = new Date();
     const options = { weekday: "long" };
     const day = date.toLocaleDateString("en-US", options);
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    if (hour < 10) {
-      return `${day} 0${hour}:${minutes}`;
-    }
-    if (minutes < 10) {
-      return `${day} ${hour}:0${minutes}`;
+    if (minutes && hour < 10) {
+      return `${day} 0${hour}:0${minutes}`;
     } else {
       return `${day} ${hour}:${minutes}`;
     }
+  }
+  function citySearch(event) {
+    setCity(event.target.value);
   }
   return (
     <div className="Search-Show">
@@ -25,6 +27,7 @@ export default function Weather() {
             placeholder="Enter a City..."
             required
             className="search-text"
+            onChange={citySearch}
           />
           <input type="submit" value="Search" className="search-button" />
         </form>
@@ -32,7 +35,7 @@ export default function Weather() {
       <main>
         <div className="Weather-Content">
           <div>
-            <h1 className="City-name"></h1>
+            <h1 className="City-name">{city}</h1>
             <p className="City-details">
               <span>{actualDate()}</span>, <span></span>
               <br />
