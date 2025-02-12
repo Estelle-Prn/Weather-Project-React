@@ -3,7 +3,17 @@ import axios from "axios";
 
 export default function Weather() {
   const [city, setCity] = useState("");
+  const [weather, setWeather] = useState({});
 
+  function showWeather(response) {
+    setWeather({
+      city: response.data.city,
+      temperature: Math.round(response.data.main.temp),
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      description: response.data.weather[0].description,
+    });
+  }
   function actualDate() {
     const date = new Date();
     const options = { weekday: "long" };
@@ -23,6 +33,7 @@ export default function Weather() {
   function citySubmit(event) {
     event.preventDefault();
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
+    axios.get(apiUrl).then(showWeather);
   }
   function citySearch(event) {
     setCity(event.target.value);
@@ -44,19 +55,19 @@ export default function Weather() {
       <main>
         <div className="Weather-Content">
           <div>
-            <h1 className="City-name"></h1>
+            <h1 className="City-name">{weather.city}</h1>
             <p className="City-details">
-              <span>{actualDate()}</span>, <span></span>
+              <span>{actualDate()}</span>, <span>{weather.description}</span>
               <br />
-              Humidity: <strong>%</strong>, Wind:
-              <strong> km/h</strong>
+              Humidity: <strong>{weather.humidity}%</strong>, Wind:
+              <strong> {weather.wind}km/h</strong>
             </p>
           </div>
           <div className="City-temperature">
             <span>
               <img src="" className="temperature-icone" />
             </span>
-            <span className="actual-temperature"></span>
+            <span className="actual-temperature">{weather.temperature}</span>
             <span className="temperature-celsius">°C</span>
           </div>
         </div>
