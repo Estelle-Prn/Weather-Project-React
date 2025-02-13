@@ -2,13 +2,13 @@ import React, { use, useState } from "react";
 import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 
-export default function Weather() {
-  const [city, setCity] = useState("");
+export default function Weather(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [weather, setWeather] = useState({});
 
   function showWeather(response) {
     setWeather({
-      city: response.data.city,
+      city: response.data.name,
       temperature: Math.round(response.data.main.temp),
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
@@ -33,7 +33,8 @@ export default function Weather() {
 
   function citySubmit(event) {
     event.preventDefault();
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
     axios.get(apiUrl).then(showWeather);
   }
   function citySearch(event) {
@@ -56,7 +57,7 @@ export default function Weather() {
       <main>
         <div className="Weather-Content">
           <div>
-            <h1 className="City-name">{weather.city}</h1>
+            <h1 className="City-name">{city}</h1>
             <p className="City-details">
               <span>{actualDate()}</span>, <span>{weather.description}</span>
               <br />

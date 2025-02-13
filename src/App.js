@@ -4,8 +4,8 @@ import Weather from "./Weather";
 
 function App() {
   return (
-    <div className="Weather-Box">
-      <Weather />
+    <div className="Weather-Box ">
+      <Weather defaultCity="Rome" />
       <footer>
         Coded by{" "}
         <a href="https://github.com/estelle-prn" target="_blank">
