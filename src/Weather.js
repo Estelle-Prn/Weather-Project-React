@@ -42,7 +42,7 @@ export default function Weather() {
   return (
     <div className="Search-Show">
       <header>
-        <form className="search-block" onSubmit={citySubmit}>
+        <form className="search-block d-flex" onSubmit={citySubmit}>
           <input
             type="search"
             placeholder="Enter a City..."
