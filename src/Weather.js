@@ -33,11 +33,14 @@ export default function Weather(props) {
 
   function citySubmit(event) {
     event.preventDefault();
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
-    axios.get(apiUrl).then(showWeather);
+    searchWithApi();
   }
   function citySearch(event) {
     setCity(event.target.value);
+  }
+  function searchWithApi() {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
+    axios.get(apiUrl).then(showWeather);
   }
   return (
     <div className="Search-Show">
