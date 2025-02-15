@@ -33,7 +33,6 @@ export default function Weather(props) {
 
   function citySubmit(event) {
     event.preventDefault();
-
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=094780c710fa4efd669f0df8c3991927&units=metric`;
     axios.get(apiUrl).then(showWeather);
   }
@@ -59,7 +58,8 @@ export default function Weather(props) {
           <div>
             <h1 className="City-name">{city}</h1>
             <p className="City-details">
-              <span>{actualDate()}</span>, <span>{weather.description}</span>
+              <span>{actualDate()}</span>,{" "}
+              <span className="text-capitalize">{weather.description}</span>
               <br />
               Humidity: <strong>{weather.humidity}%</strong>, Wind:
               <strong> {weather.wind}km/h</strong>
